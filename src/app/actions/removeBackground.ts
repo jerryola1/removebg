@@ -20,7 +20,7 @@ interface RemBgInput {
 }
 
 // Function to remove background from an image
-export async function removeBackground(imageUrl: string) {
+export async function removeBackground(imageUrl: string): Promise<string> {
   console.log("Starting removeBackground function");
 
   // Ensure that the FAL_KEY environment variable is set
@@ -38,22 +38,22 @@ export async function removeBackground(imageUrl: string) {
     console.log("Calling fal.run with imageUrl:", imageUrl);
 
     // Call the API for background removal and process the image URL
-    const result: any = await fal.run<any, { input: RemBgInput }>("fal-ai/imageutils/rembg", {
+    const result = await fal.run<RemBgInput, RemBgResult>("fal-ai/imageutils/rembg", {
       input: {
-        image_url: imageUrl,  // Pass the image URL as input
-      },
+        image_url: imageUrl, // Pass the image URL as input
+      }
     });
 
     console.log("Result from fal.run:", result);
 
-    // Ensure the result contains a valid image object
-    if (!result || typeof result !== 'object' || !result.image || !result.image.url) {
+    // Ensure the result contains a valid image string
+    if (!result || !result.image || typeof result.image.url !== 'string') {
       console.error("Invalid response from background removal service:", result);
       throw new Error("Invalid response from background removal service");
     }
 
     // Return the URL of the processed image
-    console.log("Returning processed image URL:", result.image.url);
+    console.log("Returning processed image URL:", result.image);
     return result.image.url;
   } catch (error) {
     console.error("Error removing background:", error);

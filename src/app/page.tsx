@@ -2,6 +2,7 @@
 "use client"; // Marking this component as a Client Component
 import { useState } from 'react';
 import { removeBackground } from './actions/removeBackground';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null); // state to store the uploaded image
@@ -73,7 +74,13 @@ export default function HomePage() {
         <div className="left-section">
           <div className="image-frame">
             {selectedImage ? (
-              <img src={URL.createObjectURL(selectedImage)} alt="Uploaded" className="uploaded-image" />
+              <Image 
+                src={URL.createObjectURL(selectedImage)} 
+                alt="Uploaded" 
+                width={400}  // Specify a width
+                height={400} // Specify a height
+                objectFit="cover"
+              />
             ) : (
               <div className="placeholder">📸 Upload an image</div>
             )}
@@ -85,7 +92,13 @@ export default function HomePage() {
             <div className="image-container">
               {processedImage ? (
                 <>
-                  <img src={processedImage} alt="Processed" className="processed-image" />
+                  <Image 
+                    src={processedImage} 
+                    alt="Processed" 
+                    width={400}  // Specify a width
+                    height={400} // Specify a height
+                    objectFit="contain"
+                  />
                   <button onClick={handleDownload} className="download-button" title="Download processed image">
                     <svg className="download-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 16l-5-5h3V4h4v7h3l-5 5zm0 2l-5-5h3v-4h4v4h3l-5 5z"/>
