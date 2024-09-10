@@ -1,8 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RemoveBG - Background Removal App
+
+This is a [Next.js](https://nextjs.org) project that allows users to remove backgrounds from images using AI.
+
+## Features
+
+- Upload images
+- Remove backgrounds using AI-powered service
+- Display processed images with transparent backgrounds
 
 ## Getting Started
 
-First, run the development server:
+First, set up your environment variables:
+
+1. Create a `.env.local` file in the root directory
+2. Add your FAL AI API key:
+   ```
+   FAL_KEY=your_fal_ai_api_key_here
+   ```
+
+Then, run the development server:
 
 ```bash
 npm run dev

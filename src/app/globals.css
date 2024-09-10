@@ -1,27 +1,370 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --gradient-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --gradient-text: linear-gradient(135deg, #12c2e9 0%, #c471ed 50%, #f64f59 100%);
+  --gradient-button: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', sans-serif;
+  background: var(--gradient-bg);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    flex-direction: row;
   }
+}
+
+.left-section, .right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-frame {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.uploaded-image, .processed-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.upload-button, .process-button {
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.upload-button:hover, .process-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
+}
+
+/* global.css */
+
+/* container layout */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* nav bar styling */
+.nav-bar {
+  text-align: center;
+  padding: 1rem;
+}
+
+.nav-bar h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* main content styling */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+
+.left-section, .right-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .left-section, .right-section {
+    margin-bottom: 0;
+  }
+}
+
+/* 1st image frame for the uploaded image */
+.image-frame {
+  width: 80%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.uploaded-image, .processed-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* 2nd image frame for the processed image */
+.processed-frame {
+  background-image: url('/fl.jpg'); /* Add the path to your second frame */
+}
+
+.processed-image {
+  max-width: 100%;
+  height: auto;
+}
+
+/* upload section */
+.upload-section {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.upload-section input[type="file"] {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.upload-section button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-section button:hover {
+  background-color: #45a049;
+}
+
+/* footer styling */
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #f5f5f5;
+  box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* styles.css or your relevant CSS file */
+.flower-background {
+  background-image: url('/fl.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.placeholder-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  color: #888;
+}
+
+.placeholder-image {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.right-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+}
+
+.polaroid-frame {
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  transform: rotate(3deg);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative; /* Add this */
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.processed-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  position: relative; /* Change from absolute to relative */
+  top: auto; /* Remove top positioning */
+  left: auto; /* Remove left positioning */
+}
+
+.polaroid-stack {
+  position: relative;
+}
+
+.polaroid-stack::before,
+.polaroid-stack::after {
+  content: '';
+  position: absolute;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.polaroid-stack::before {
+  top: -5px;
+  left: -5px;
+  right: 5px;
+  bottom: 5px;
+  transform: rotate(-3deg);
+  z-index: -1;
+}
+
+.polaroid-stack::after {
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  transform: rotate(2deg);
+  z-index: -2;
+}
+
+.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  padding: 1rem;
+}
+
+.download-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--gradient-button);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 10;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.download-icon {
+  width: 20px;
+  height: 20px;
 }
