@@ -13,6 +13,10 @@ interface RemBgResult {
   };
 }
 
+interface RemBgInput {
+  image_url: string;
+}
+
 export async function removeBackground(imageUrl: string) {
   console.log("Starting removeBackground function");
   if (!process.env.FAL_KEY) {
@@ -26,18 +30,15 @@ export async function removeBackground(imageUrl: string) {
 
   try {
     console.log("Calling fal.subscribe with imageUrl:", imageUrl);
-    const result = await fal.subscribe<RemBgResult, { input: { image_url: string } }>(
-      "fal-ai/imageutils/rembg",
-      {
-        input: {
-          image_url: imageUrl,
-        },
-      }
-    );
+    const result = await fal.subscribe<RemBgResult, RemBgInput>("fal-ai/imageutils/rembg", {
+      input: {
+        image_url: imageUrl,
+      },
+    });
 
     console.log("Result from fal.subscribe:", result);
 
-    if (!('image' in result) || !result.image || !result.image.url) {
+    if (!result || !result.image || typeof result.image !== 'object' || !('url' in result.image)) {
       console.error("Invalid response from background removal service:", result);
       throw new Error("Invalid response from background removal service");
     }

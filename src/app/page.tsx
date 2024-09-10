@@ -37,7 +37,7 @@ export default function HomePage() {
       console.log("Calling removeBackground with URL:", url);
       const processedImageUrl = await removeBackground(url);
       console.log("Received processed image URL:", processedImageUrl);
-      setProcessedImage(processedImageUrl);
+      setProcessedImage(processedImageUrl as string);
     } catch (error) {
       console.error('Error processing image:', error);
       setError(error instanceof Error ? error.message : 'An unknown error occurred');
