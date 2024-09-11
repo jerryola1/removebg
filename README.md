@@ -30,7 +30,7 @@ This is a [Next.js](https://nextjs.org) project that allows users to remove back
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/removebg.git
+   git clone https://github.com/jerryola1/removebg.git
    cd removebg
    ```
 
