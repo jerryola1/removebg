@@ -14,19 +14,19 @@ body {
   font-family: 'Inter', sans-serif;
   background: var(--gradient-bg);
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
 }
 
 .container {
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
   max-width: 1000px;
   width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
 }
 
 .title {
@@ -43,6 +43,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  @apply flex-grow;
 }
 
 @media (min-width: 768px) {
@@ -60,15 +61,37 @@ body {
 
 .image-frame {
   width: 100%;
+  height: 100%;
   max-width: 400px;
-  aspect-ratio: 1 / 1;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
   background-color: #f0f0f0;
+  border: 2px dashed #ccc;
+  padding: 10px; /* Add padding to create space between frame and image */
+}
+
+.image-frame:hover {
+  transform: scale(1.02);
+}
+
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .uploaded-image, .processed-image {
@@ -167,6 +190,12 @@ body {
   align-items: center;
   overflow: hidden;
   border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-frame:hover {
+  transform: scale(1.02);
 }
 
 .uploaded-image, .processed-image {
@@ -367,4 +396,99 @@ body {
 .download-icon {
   width: 20px;
   height: 20px;
+}
+
+.enlarged-image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.enlarged-image-container {
+  position: relative;
+  width: 90%;
+  height: 90%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Add these styles at the end of your globals.css file */
+
+/* Header styles */
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+/* Mobile menu transition */
+.mobile-menu-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.mobile-menu-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.mobile-menu-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.mobile-menu-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.gradient-text {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Ensure menu button is visible on mobile */
+@media (max-width: 767px) {
+  .gradient-text {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  }
+  
+  .fas {
+    font-size: 1.5rem;
+  }
 }

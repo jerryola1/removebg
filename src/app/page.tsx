@@ -9,10 +9,13 @@ export default function HomePage() {
   const [processedImage, setProcessedImage] = useState<string | null>(null); // state to store the processed image
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [enlargedImage, setEnlargedImage] = useState<string | null>(null);
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files ? event.target.files[0] : null;
-    setSelectedImage(file); // store uploaded image
+    if (file) {
+      setSelectedImage(file); // Only update if a new file is selected
+    }
   };
 
   const handleProcessImage = async () => {
@@ -66,30 +69,49 @@ export default function HomePage() {
     }
   };
 
+  const handleEnlargeImage = () => {
+    if (processedImage) {
+      setEnlargedImage(processedImage);
+    }
+  };
+
+  const handleCloseEnlarged = () => {
+    setEnlargedImage(null);
+  };
+
+  const handleImageFrameClick = () => {
+    const fileInput = document.getElementById('file-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
+    }
+  };
+
   return (
     <div className="container">
-      <h1 className="title">Remove Image Background 🍎✨</h1>
+      <h4 className="title">RemoveImg BG 🍎</h4>
 
       <div className="main-content">
         <div className="left-section">
-          <div className="image-frame">
-            {selectedImage ? (
-              <Image 
-                src={URL.createObjectURL(selectedImage)} 
-                alt="Uploaded" 
-                width={400}  // Specify a width
-                height={400} // Specify a height
-                objectFit="cover"
-              />
-            ) : (
-              <div className="placeholder">📸 Upload an image</div>
-            )}
+          <div className="image-frame" onClick={handleImageFrameClick}>
+            <div className="image-container">
+              {selectedImage ? (
+                <Image 
+                  src={URL.createObjectURL(selectedImage)} 
+                  alt="Uploaded" 
+                  width={400}  // Specify a width
+                  height={400} // Specify a height
+                  objectFit="contain"
+                />
+              ) : (
+                <div className="placeholder">📸 Click or drag to upload an image</div>
+              )}
+            </div>
           </div>
         </div>
 
         <div className="right-section">
           <div className="polaroid-frame">
-            <div className="image-container">
+            <div className="image-container" onClick={handleEnlargeImage}>
               {processedImage ? (
                 <>
                   <Image 
@@ -138,6 +160,20 @@ export default function HomePage() {
       <footer className="footer">
         <p>🚀 Developed By <a href="https://www.linkedin.com/in/jerryola1/" target="_blank" rel="noopener noreferrer">Abayomi Olagunju</a> © 2024</p>
       </footer>
+
+      {enlargedImage && (
+        <div className="enlarged-image-overlay" onClick={handleCloseEnlarged}>
+          <div className="enlarged-image-container">
+            <Image 
+              src={enlargedImage} 
+              alt="Enlarged" 
+              layout="fill"
+              objectFit="contain"
+            />
+            <button className="close-button" onClick={handleCloseEnlarged}>X</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
