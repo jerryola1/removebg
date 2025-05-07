@@ -19,8 +19,8 @@ export default function ContactPage() {
                 <p className="text-lg font-semibold mb-2">Contact Us</p>
                 <p className="mb-2">For feedback, support, or inquiries, please reach out via LinkedIn or email.</p>
                 <p>
-                  <a href="https://www.linkedin.com/in/jerryola1/" target="_blank" rel="noopener noreferrer" className="underline">LinkedIn</a><br />
-                  <a href="mailto:abayomi.olagunju@gmail.com" className="underline">abayomi.olagunju@gmail.com</a>
+                  <a href="https://www.linkedin.com/in/jerryola1/" target="_blank" rel="noopener noreferrer">LinkedIn</a><br />
+                  <a href="mailto:olagunjujeremiah@gmail.com">olagunjujeremiah@gmail.com</a>
                 </p>
               </div>
             </div>
